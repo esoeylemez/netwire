@@ -4,6 +4,8 @@
 -- License:    BSD3
 -- Maintainer: Ertugrul Soeylemez <es@ertes.de>
 
+{-# LANGUAGE RankNTypes #-}
+
 module Control.Wire.Run
     ( -- * Testing wires
       testWire,

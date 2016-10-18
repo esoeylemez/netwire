@@ -4,6 +4,10 @@
 -- License:    BSD3
 -- Maintainer: Ertugrul Soeylemez <es@ertes.de>
 
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE TupleSections #-}
+
 module Control.Wire.Core
     ( -- * Wires
       Wire(..),

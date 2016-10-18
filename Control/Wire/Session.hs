@@ -4,6 +4,14 @@
 -- License:    BSD3
 -- Maintainer: Ertugrul Soeylemez <es@ertes.de>
 
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveFoldable #-}
+{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE DeriveTraversable #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
 module Control.Wire.Session
     ( -- * State delta types
       HasTime(..),

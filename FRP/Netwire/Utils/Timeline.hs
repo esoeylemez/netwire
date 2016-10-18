@@ -4,6 +4,8 @@
 -- License:    BSD3
 -- Maintainer: Ertugrul Soeylemez <es@ertes.de>
 
+{-# LANGUAGE DeriveDataTypeable #-}
+
 module FRP.Netwire.Utils.Timeline
     ( -- * Time lines for statistics wires
       Timeline,
