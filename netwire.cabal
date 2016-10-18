@@ -6,8 +6,8 @@ synopsis: Functional reactive programming library
 maintainer:   Ertugrul Söylemez <esz@posteo.de>
 author:       Ertugrul Söylemez <esz@posteo.de>
 copyright:    Copyright 2016 Ertugrul Söylemez
-homepage:     https://github.com/esoeylemez/SKELETON
-bug-reports:  https://github.com/esoeylemez/SKELETON/issues
+homepage:     https://github.com/esoeylemez/netwire
+bug-reports:  https://github.com/esoeylemez/netwire/issues
 license:      BSD3
 license-file: LICENSE
 
