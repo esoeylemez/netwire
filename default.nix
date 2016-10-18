@@ -9,7 +9,7 @@ mkDerivation {
     base containers deepseq parallel profunctors random semigroups time
     transformers
   ];
-  homepage = "https://github.com/esoeylemez/SKELETON";
+  homepage = "https://github.com/esoeylemez/netwire";
   description = "Functional reactive programming library";
   license = stdenv.lib.licenses.bsd3;
 }
