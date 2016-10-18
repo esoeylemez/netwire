@@ -3,11 +3,11 @@ version:  5.0.1
 category: FRP
 synopsis: Functional reactive programming library
 
-maintainer:   Ertugrul Söylemez <ertesx@gmx.de>
-author:       Ertugrul Söylemez <ertesx@gmx.de>
-copyright:    (c) 2014 Ertugrul Söylemez
-homepage:     http://hub.darcs.net/ertes/netwire
-bug-reports:  http://hub.darcs.net/ertes/netwire/issues
+maintainer:   Ertugrul Söylemez <esz@posteo.de>
+author:       Ertugrul Söylemez <esz@posteo.de>
+copyright:    Copyright 2016 Ertugrul Söylemez
+homepage:     https://github.com/esoeylemez/SKELETON
+bug-reports:  https://github.com/esoeylemez/SKELETON/issues
 license:      BSD3
 license-file: LICENSE
 
@@ -16,20 +16,18 @@ description:
     useful both for functional reactive programming (FRP) and locally
     stateful programming (LSP).
 
-build-type:    Simple
-cabal-version: >= 1.10
-extra-source-files:
-    README.md
-    shell.nix
+build-type:         Simple
+cabal-version:      >= 1.10
+extra-source-files: CHANGELOG.md README.md
 
-Source-repository head
-    type:     darcs
-    location: http://hub.darcs.net/ertes/netwire
+source-repository head
+    type:     git
+    location: https://github.com/esoeylemez/netwire.git
 
-flag TestProgram
-    default: False
-    description: Build the test program
-    manual: True
+-- flag Examples
+--     default: False
+--     description: Build the example programs
+--     manual: True
 
 library
     build-depends:
@@ -54,7 +52,7 @@ library
         MultiParamTypeClasses
         RankNTypes
         TupleSections
-    ghc-options: -W
+    ghc-options: -W -fdefer-typed-holes
     exposed-modules:
         Control.Wire
         Control.Wire.Core
@@ -71,18 +69,18 @@ library
         FRP.Netwire.Noise
         FRP.Netwire.Utils.Timeline
 
-executable netwire-test
-    build-depends:
-        base >= 4.5 && < 5,
-        containers,
-        netwire
-    default-language: Haskell2010
-    default-extensions:
-        Arrows
-        OverloadedStrings
-        RecursiveDo
-    ghc-options: -threaded
-    hs-source-dirs: test
-    main-is: Test.hs
-    if !flag(testprogram)
-        buildable: False
+-- executable netwire-test
+--     build-depends:
+--         base >= 4.5 && < 5,
+--         containers,
+--         netwire
+--     default-language: Haskell2010
+--     default-extensions:
+--         Arrows
+--         OverloadedStrings
+--         RecursiveDo
+--     ghc-options: -threaded
+--     hs-source-dirs: test
+--     main-is: Test.hs
+--     if !flag(testprogram)
+--         buildable: False
