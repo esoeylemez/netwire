@@ -1,0 +1,88 @@
+name:     netwire
+version:  5.0.1
+category: FRP
+synopsis: Functional reactive programming library
+
+maintainer:   Ertugrul Söylemez <ertesx@gmx.de>
+author:       Ertugrul Söylemez <ertesx@gmx.de>
+copyright:    (c) 2014 Ertugrul Söylemez
+homepage:     http://hub.darcs.net/ertes/netwire
+bug-reports:  http://hub.darcs.net/ertes/netwire/issues
+license:      BSD3
+license-file: LICENSE
+
+description:
+    This library provides interfaces for and implements wire arrows
+    useful both for functional reactive programming (FRP) and locally
+    stateful programming (LSP).
+
+build-type:    Simple
+cabal-version: >= 1.10
+extra-source-files:
+    README.md
+    shell.nix
+
+Source-repository head
+    type:     darcs
+    location: http://hub.darcs.net/ertes/netwire
+
+flag TestProgram
+    default: False
+    description: Build the test program
+    manual: True
+
+library
+    build-depends:
+        base         >= 4.5  && < 5,
+        containers   >= 0.5  && < 1,
+        deepseq      >= 1.3  && < 2,
+        parallel     >= 3.2  && < 4,
+        profunctors  >= 4.3  && < 5,
+        random       >= 1.1  && < 2,
+        semigroups   >= 0.15 && < 1,
+        transformers >= 0.3  && < 1,
+        time         >= 1.4  && < 2
+    default-language: Haskell2010
+    default-extensions:
+        DeriveDataTypeable
+        DeriveFoldable
+        DeriveFunctor
+        DeriveTraversable
+        FlexibleInstances
+        FunctionalDependencies
+        GADTs
+        MultiParamTypeClasses
+        RankNTypes
+        TupleSections
+    ghc-options: -W
+    exposed-modules:
+        Control.Wire
+        Control.Wire.Core
+        Control.Wire.Event
+        Control.Wire.Interval
+        Control.Wire.Run
+        Control.Wire.Session
+        Control.Wire.Switch
+        Control.Wire.Time
+        Control.Wire.Unsafe.Event
+        FRP.Netwire
+        FRP.Netwire.Analyze
+        FRP.Netwire.Move
+        FRP.Netwire.Noise
+        FRP.Netwire.Utils.Timeline
+
+executable netwire-test
+    build-depends:
+        base >= 4.5 && < 5,
+        containers,
+        netwire
+    default-language: Haskell2010
+    default-extensions:
+        Arrows
+        OverloadedStrings
+        RecursiveDo
+    ghc-options: -threaded
+    hs-source-dirs: test
+    main-is: Test.hs
+    if !flag(testprogram)
+        buildable: False
