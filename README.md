@@ -37,11 +37,11 @@ Don't worry about the large number of type arguments.  They all have
 very simple meanings, which will be explained below.
 
 A value of this type is called a *wire* and represents a *reactive*
-value of type $b$, that is a value that may change over time.  It may
-depend on a reactive value of type $a$.  In a sense a wire is a function
-from a reactive value of type $a$ to a reactive value of type $b$, so
+value of type `b`, that is a value that may change over time.  It may
+depend on a reactive value of type `a`.  In a sense a wire is a function
+from a reactive value of type `a` to a reactive value of type `b`, so
 whenever you see something of type `Wire s e m a b` your mind should
-draw an arrow from $a$ to $b$.  In FRP terminology a reactive value is
+draw an arrow from `a` to `b`.  In FRP terminology a reactive value is
 called a *behavior*.
 
 A constant reactive value can be constructed using `pure`:
@@ -67,7 +67,7 @@ myWire :: (Monad m, Num b) => Wire s e m a b
 myWire = liftA2 (+) (pure 15) (pure 17)
 ```
 
-This indicates that $m$ is some kind of underlying monad.  As an
+This indicates that `m` is some kind of underlying monad.  As an
 application developer you don't have to concern yourself much about it.
 Framework developers can use it to allow wires to access environment
 values through a reader monad or to produce something (like a GUI)
@@ -85,10 +85,10 @@ execution begins.  It does not make any assumptions about the time type
 other than that it is a numeric type with a `Real` instance.  This is
 enforced implicitly by the `HasTime` constraint.
 
-The type of this wire gives some insight into the $s$ parameter.  Wires
+The type of this wire gives some insight into the `s` parameter.  Wires
 are generally pure and do not have access to the system clock or other
 run-time information.  The timing information has to come from outside
-and is passed to the wire through a value of type $s$, called the *state
+and is passed to the wire through a value of type `s`, called the *state
 delta*.  We will learn more about this in the next section about
 executing wires.
 
@@ -101,7 +101,7 @@ fmap (2*) time
 
 This reactive value is a clock that is twice as fast as the regular
 local time clock.  If you use system time as your clock, then the time
-type $t$ will most likely be `NominalDiffTime` from `Data.Time.Clock`.
+type `t` will most likely be `NominalDiffTime` from `Data.Time.Clock`.
 However, you will usually want to have time of type `Double` or some
 other floating point type.  There is a predefined wire for this:
 
@@ -196,8 +196,8 @@ clockSession_ ::
     => Session m (Timed NominalDiffTime ())
 ```
 
-It will instantiate $s$ to be `Timed NominalDiffTime ()`.  This type
-indeed has a `HasTime` instance with $t$ being `NominalDiffTime`.  In
+It will instantiate `s` to be `Timed NominalDiffTime ()`.  This type
+indeed has a `HasTime` instance with `t` being `NominalDiffTime`.  In
 simpler words it provides a clock to the wire.  At first it may seem
 weird to use `NominalDiffTime` instead of something like `UTCTime`, but
 this is reasonable, because time is relative to the wire's start time.
@@ -231,8 +231,8 @@ fast:
 ```
 
 If you have trouble wrapping your head around such an expression it may
-help to read `a*b + c` mathematically as $a(t) b(t) + c(t)$ and read
-`time` as simply $t$.
+help to read `a*b + c` mathematically as `a(t)*b(t) + c(t)` and read
+`time` as simply `t`.
 
 So far we have seen wires that ignore their input.  The following wire
 uses its input:
@@ -250,20 +250,20 @@ integral 5 . 3
 ```
 
 Remember that `3` really means `pure 3`, a constant wire.  The integral
-of the constant 3 is $3 t + c$ and here $c = 5$.  Here is another
+of the constant 3 is `3*t + c` and here `c = 5`.  Here is another
 example:
 
 ``` haskell
 integral 5 . time
 ```
 
-Since `time` denotes $t$ the integral will be $\frac{1}{2} t^2 + c$,
-again with $c = 5$.  This may sound like a complicated, sophisticated
-wire, but it's really not.  Surprisingly there is no crazy algebra or
-complicated numerical algorithm going on under the hood.  Integrating
-over time requires one addition and one division each frame.  So there
-is nothing wrong with using it extensively to animate a scene or to move
-objects in a game.
+Since `time` denotes `t` the integral will be `t^2/2 + c`, again with `c
+= 5`.  This may sound like a complicated, sophisticated wire, but it's
+really not.  Surprisingly there is no crazy algebra or complicated
+numerical algorithm going on under the hood.  Integrating over time
+requires one addition and one division each frame.  So there is nothing
+wrong with using it extensively to animate a scene or to move objects in
+a game.
 
 Sometimes categorical composition and the applicative interface can be
 inconvenient, in which case you may choose to use the arrow interface.
@@ -276,7 +276,7 @@ proc _ -> do
 ```
 
 Since `time` ignores its input signal, we just give it a constant signal
-with value `()`.  We name time's value $t$ and pass it as the input
+with value `()`.  We name time's value `t` and pass it as the input
 signal to `integral`.
 
 
@@ -302,7 +302,7 @@ The signal of this wire will be "yes", but after three seconds it will
 stop to act like the identity wire and will inhibit forever.
 
 When you use `testWire` inhibition will be displayed as "I:" followed by
-a value, the *inhibition value*.  This is what the $e$ parameter to
+a value, the *inhibition value*.  This is what the `e` parameter to
 `Wire` is.  It's called the *inhibition monoid*:
 
 ``` haskell
@@ -312,8 +312,8 @@ for :: (HasTime t s, Monoid e) => t -> Wire s e m a a
 As you can see the input and output types are the same and fully
 polymorphic, hinting at the identity-like behavior.  All predefined
 intervals inhibit with the `mempty` value.  When the wire inhibits, you
-don't get a signal of type $a$, but rather an inhibition value of type
-$e$.  Netwire does not interpret this value in any way and in most cases
+don't get a signal of type `a`, but rather an inhibition value of type
+`e`.  Netwire does not interpret this value in any way and in most cases
 you would simply use `e = ()`.
 
 Intervals give you a very elegant way to combine wires:
