@@ -28,13 +28,13 @@ module Control.Wire.Switch
     )
     where
 
-import qualified Data.Map as M
 import Control.Applicative
 import Control.Arrow
 import Control.Monad
 import Control.Wire.Core
 import Control.Wire.Event
 import Control.Wire.Unsafe.Event
+import qualified Data.Map as M
 import Data.Monoid
 
 

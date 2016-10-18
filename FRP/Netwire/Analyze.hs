@@ -27,10 +27,10 @@ module FRP.Netwire.Analyze
     )
     where
 
-import qualified FRP.Netwire.Utils.Timeline as Tl
+import Control.Wire
 import qualified Data.Foldable as F
 import qualified Data.Sequence as Seq
-import Control.Wire
+import qualified FRP.Netwire.Utils.Timeline as Tl
 import Prelude hiding ((.), id)
 
 

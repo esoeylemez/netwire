@@ -41,7 +41,6 @@ module Control.Wire.Core
     )
     where
 
-import qualified Data.Semigroup as Sg
 import Control.Applicative
 import Control.Arrow
 import Control.Category
@@ -49,8 +48,9 @@ import Control.DeepSeq hiding (force)
 import Control.Monad
 import Control.Monad.Fix
 import Control.Parallel.Strategies
-import Data.Profunctor
 import Data.Monoid
+import Data.Profunctor
+import qualified Data.Semigroup as Sg
 import Data.String
 import Prelude hiding ((.), id)
 
