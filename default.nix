@@ -3,7 +3,7 @@
 }:
 mkDerivation {
   pname = "netwire";
-  version = "5.0.1";
+  version = "5.0.2";
   src = ./.;
   libraryHaskellDepends = [
     base containers deepseq parallel profunctors random semigroups time
