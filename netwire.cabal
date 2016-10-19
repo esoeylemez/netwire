@@ -42,9 +42,9 @@ library
         time         >= 1.4  && < 2
     default-language: Haskell2010
     if impl(ghc >= 7.10.1)
-       ghc-options: -W -fdefer-typed-holes
+        ghc-options: -W -fdefer-typed-holes
     else
-       ghc-options: -W
+        ghc-options: -W
     exposed-modules:
         Control.Wire
         Control.Wire.Core
