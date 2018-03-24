@@ -30,7 +30,7 @@ import Control.Applicative
 import Control.Monad.IO.Class
 import Data.Data
 import Data.Foldable (Foldable)
-import Data.Monoid
+import Data.Semigroup
 import Data.Time.Clock
 import Data.Traversable (Traversable)
 
@@ -66,17 +66,18 @@ data Timed t s = Timed t s
     deriving (Data, Eq, Foldable, Functor,
               Ord, Read, Show, Traversable, Typeable)
 
-instance (Monoid s, Real t) => HasTime t (Timed t s) where
+instance (Semigroup s, Monoid s, Real t) => HasTime t (Timed t s) where
     dtime (Timed dt _) = dt
 
-instance (Monoid s, Num t) => Monoid (Timed t s) where
-    mempty = Timed 0 mempty
+instance (Semigroup s, Num t) => Semigroup (Timed t s) where
+  (Timed dt1 ds1) <> (Timed dt2 ds2) =
+    let dt = dt1 + dt2
+        ds = ds1 <> ds2
+     in dt `seq` ds `seq` Timed dt ds
 
-    mappend (Timed dt1 ds1) (Timed dt2 ds2) =
-        let dt = dt1 + dt2
-            ds = ds1 <> ds2
-        in dt `seq` ds `seq` Timed dt ds
-
+instance (Semigroup s, Monoid s, Num t) => Monoid (Timed t s) where
+  mempty = Timed 0 mempty
+  mappend = (<>)
 
 -- | State delta generator for a real time clock.
 
