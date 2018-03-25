@@ -70,14 +70,14 @@ instance (Semigroup s, Monoid s, Real t) => HasTime t (Timed t s) where
     dtime (Timed dt _) = dt
 
 instance (Semigroup s, Num t) => Semigroup (Timed t s) where
-  (Timed dt1 ds1) <> (Timed dt2 ds2) =
-    let dt = dt1 + dt2
-        ds = ds1 <> ds2
-     in dt `seq` ds `seq` Timed dt ds
+    Timed dt1 ds1 <> Timed dt2 ds2 =
+        let dt = dt1 + dt2
+            ds = ds1 <> ds2
+        in dt `seq` ds `seq` Timed dt ds
 
 instance (Semigroup s, Monoid s, Num t) => Monoid (Timed t s) where
-  mempty = Timed 0 mempty
-  mappend = (<>)
+    mempty = Timed 0 mempty
+    mappend = (<>)
 
 -- | State delta generator for a real time clock.
 
